@@ -1,0 +1,54 @@
+*ftconf.txt* Pure lua language-specific configuration.
+*ftconf.nvim*
+
+==============================================================================
+CONTENTS                                                      *ftconf-contents*
+
+  1. Intro....................................|ftconf-intro|
+  2. API......................................|ftconf-api|
+
+==============================================================================
+INTRO                                                            *ftconf-intro*
+
+In the same spirit as |ftplugin|, this plugin enables language-specific 
+configurations. It allows its user to configure a function to be called when a
+buffer is installed. Here is a sample setup: >
+
+  require('ftconf').setup{
+    go = function(bufnr, winid)
+      -- Set window options
+      vim.api.vim_win_set_option(1000, 'colorcolumn', '80,120')
+
+      -- Set buffer options
+      buf_set_keymap('n', '<Leader>p', 
+        '<cmd>lua echo"go!"', 
+        { noremap = true, silent = true })
+    end,
+    lua = function(bufnr, winid)
+      -- Set window options
+      vim.api.vim_win_set_option(1000, 'colorcolumn', '80')
+
+      -- Set buffer options
+      buf_set_keymap('n', '<Leader>p', 
+        '<cmd>lua echo"lua!"', 
+        { noremap = true, silent = true })
+    end,
+  }
+<
+
+
+==============================================================================
+API                                                               *ftconf-api*
+
+                                                              *ftconf.setup()*
+ftconf.setup({cfg})
+
+    Registers configuration functions for each filetypes. {cfg} should be a
+    key value pair of a filetype and a function: >
+
+    {
+      go  = function(bufnr, winid) ... end,
+      lua = function(bufnr, winid) ... end,
+      c   = function(bufnr, winid) ... end,
+    }
+<
