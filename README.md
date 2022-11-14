@@ -1,7 +1,7 @@
 # ftconf.nvim
 
 In the same spirit as [ftplugin](https://neovim.io/doc/user/usr_41.html#41.12), this plugin enables language-specific
-configurations. It allows its user to configure a function to be called when a buffer is installed. Here is a sample
+configurations. It allows its user to configure a function to be called when a buffer is launched. Here is a sample
 setup:
 
 ```lua
